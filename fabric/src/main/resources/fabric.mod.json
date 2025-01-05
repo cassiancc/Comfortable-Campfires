@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "comfortable_campfires",
+  "version": "${version}",
+  "name": "Comfortable Campfires",
+  "description": "Sitting by the campfire is now just a little more comfortable. Lit campfires now give nearby players Regeneration or Farmer's Delight's Comfort.",
+  "authors": [
+    "cassiancc"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/comfortable-campfires",
+    "sources": "https://github.com/cassiancc/Comfortable-Campfires",
+    "issues": "https://github.com/cassiancc/Comfortable-Campfires/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/comfortable_campfires/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "cc.cassian.campfire.fabric.CampfireModFabric"
+    ]
+  },
+  "mixins": [
+    "comfortable_campfires.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "minecraft": ">=1.19",
+    "java": ">=17",
+    "fabric-api": "*"
+  },
+  "recommends": {
+    "farmersdelight": "*"
+  }
+}

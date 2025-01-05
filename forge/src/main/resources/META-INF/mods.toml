@@ -1,0 +1,28 @@
+modLoader = "javafml"
+loaderVersion = "[41,)"
+issueTrackerURL = "https://github.com/cassiancc/Comfortable-Campfires/issues"
+license = "MIT"
+
+[[mods]]
+modId = "comfortable_campfires"
+version = "${version}"
+displayName = "Comfortable Campfires"
+authors = "cassiancc"
+description = '''
+Sitting by the campfire is now just a little more comfortable. Lit campfires now give nearby players Regeneration or Farmer's Delight's Comfort.
+'''
+logoFile = "icon.png"
+
+[[dependencies.comfortable_campfires]]
+modId = "forge"
+mandatory = true
+versionRange = "[41,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.comfortable_campfires]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.19,)"
+ordering = "NONE"
+side = "BOTH"
