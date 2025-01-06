@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[41,)"
+loaderVersion = "[4,)"
 issueTrackerURL = "https://github.com/cassiancc/Comfortable-Campfires/issues"
 license = "MIT"
 
@@ -14,15 +14,15 @@ Sitting by the campfire is now just a little more comfortable. Lit campfires now
 logoFile = "icon.png"
 
 [[dependencies.comfortable_campfires]]
-modId = "forge"
-mandatory = true
-versionRange = "[41,)"
+modId = "neoforge"
+type = "required"
+versionRange = "[21.0,)"
 ordering = "NONE"
-side = "BOTH"
+side = "CLIENT"
 
 [[dependencies.comfortable_campfires]]
 modId = "minecraft"
-mandatory = true
-versionRange = "[1.19,)"
+type = "required"
+versionRange = "[1.21,)"
 ordering = "NONE"
-side = "BOTH"
+side = "CLIENT"

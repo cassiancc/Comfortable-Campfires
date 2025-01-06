@@ -11,4 +11,4 @@ rootProject.name = 'comfortable_campfires'
 
 include 'common'
 include 'fabric'
-include 'forge'
+include 'neoforge'

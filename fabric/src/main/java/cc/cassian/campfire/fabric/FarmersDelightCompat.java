@@ -1,10 +1,11 @@
 package cc.cassian.campfire.fabric;
 
-import com.nhoryzon.mc.farmersdelight.registry.EffectsRegistry;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.registry.entry.RegistryEntry;
+import vectorwing.farmersdelight.common.registry.ModEffects;
 
 public class FarmersDelightCompat {
-    public static StatusEffect getComfortEffect() {
-        return EffectsRegistry.COMFORT.get();
+    public static RegistryEntry<StatusEffect> getComfortEffect() {
+        return ModEffects.COMFORT;
     }
 }
