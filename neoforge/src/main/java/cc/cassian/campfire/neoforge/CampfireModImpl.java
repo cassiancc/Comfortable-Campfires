@@ -1,6 +1,6 @@
-package cc.cassian.campfire.forge;
+package cc.cassian.campfire.neoforge;
 
-import cc.cassian.campfire.compat.forge.FarmersDelightCompat;
+import cc.cassian.campfire.compat.neoforge.FarmersDelightCompat;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.registry.entry.RegistryEntry;

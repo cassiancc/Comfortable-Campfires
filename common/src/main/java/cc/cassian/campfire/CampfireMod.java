@@ -30,7 +30,7 @@ public final class CampfireMod {
 
             Box box = new Box(pos).expand(ModConfig.get().distance).stretch(0.0, ModConfig.get().distance, 0.0);
             List<PlayerEntity> list = world.getNonSpectatingEntities(PlayerEntity.class, box);
-            StatusEffect statusEffect = checkConfigAndGetEffect();
+            RegistryEntry<StatusEffect> statusEffect = checkConfigAndGetEffect();
 
             for (PlayerEntity playerEntity : list) {
                 if (playerEntity.hasStatusEffect(statusEffect)) {
@@ -44,7 +44,7 @@ public final class CampfireMod {
         }
     }
 
-    public static StatusEffect checkConfigAndGetEffect() {
+    public static RegistryEntry<StatusEffect> checkConfigAndGetEffect() {
         if (ModConfig.get().useComfort) {
             return getEffect();
         }

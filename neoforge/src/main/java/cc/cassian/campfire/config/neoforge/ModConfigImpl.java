@@ -1,7 +1,6 @@
-package cc.cassian.campfire.config.forge;
+package cc.cassian.campfire.config.neoforge;
 
-
-import net.minecraftforge.fml.loading.FMLLoader;
+import net.neoforged.fml.loading.FMLLoader;
 
 import java.nio.file.Path;
 
