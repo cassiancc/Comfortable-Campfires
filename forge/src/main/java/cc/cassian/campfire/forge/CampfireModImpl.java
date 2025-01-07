@@ -1,5 +1,6 @@
 package cc.cassian.campfire.forge;
 
+import cc.cassian.campfire.compat.forge.FarmersDelightCompat;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraftforge.fml.ModList;
