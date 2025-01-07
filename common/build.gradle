@@ -24,5 +24,6 @@ dependencies {
     // Do NOT use other classes from Fabric Loader.
     modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
     modImplementation "maven.modrinth:farmers-delight:1.19.2-1.2.4"
+    modApi "me.shedaniel.cloth:cloth-config:${project.cloth_version}"
 
 }
