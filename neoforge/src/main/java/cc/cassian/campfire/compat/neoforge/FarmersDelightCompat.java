@@ -1,4 +1,4 @@
-package cc.cassian.campfire.fabric;
+package cc.cassian.campfire.compat.neoforge;
 
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.registry.entry.RegistryEntry;

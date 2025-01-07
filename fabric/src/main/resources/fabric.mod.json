@@ -18,6 +18,9 @@
   "entrypoints": {
     "main": [
       "cc.cassian.campfire.fabric.CampfireModFabric"
+    ],
+    "modmenu": [
+      "cc.cassian.campfire.config.fabric.ModMenuIntegration"
     ]
   },
   "mixins": [

@@ -1,0 +1,7 @@
+{
+  "config.comfortable_campfires.config.distance": "Maximum distance from campfire",
+  "config.comfortable_campfires.config.duration": "Maximum duration of effect",
+  "config.comfortable_campfires.config.useComfort": "Give Comfort effect instead of Regen"
+
+
+}
