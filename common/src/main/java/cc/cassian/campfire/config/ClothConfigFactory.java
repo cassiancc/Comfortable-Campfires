@@ -15,7 +15,7 @@ public class ClothConfigFactory {
     public static Screen create(Screen parent) {
         final var builder = ConfigBuilder.create()
                 .setParentScreen(parent)
-                .setTitle(Text.translatable("config.item-descriptions.title"));
+                .setTitle(Text.translatable("config.comfortable_campfires.title"));
 
         final var entryBuilder = builder.entryBuilder();
 
