@@ -18,11 +18,14 @@ modId = "neoforge"
 type = "required"
 versionRange = "[21.0,)"
 ordering = "NONE"
-side = "CLIENT"
+side = "BOTH"
 
 [[dependencies.comfortable_campfires]]
 modId = "minecraft"
 type = "required"
 versionRange = "[1.21,)"
 ordering = "NONE"
-side = "CLIENT"
+side = "BOTH"
+
+["lithium:options"]
+"mixin.world.block_entity_ticking.sleeping.campfire" = false

@@ -34,5 +34,10 @@
   },
   "recommends": {
     "farmersdelight": "*"
+  },
+  "custom": {
+    "lithium:options": {
+      "mixin.world.block_entity_ticking.sleeping.campfire": false
+    }
   }
 }
