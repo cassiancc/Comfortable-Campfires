@@ -26,3 +26,6 @@ mandatory = true
 versionRange = "[1.19,)"
 ordering = "NONE"
 side = "BOTH"
+
+["lithium:options"]
+"mixin.world.block_entity_ticking.sleeping.campfire" = false
