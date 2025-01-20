@@ -37,7 +37,7 @@
   },
   "custom": {
     "lithium:options": {
-      "mixin.world.block_entity_ticking.sleeping.campfire.lit": false
+      "mixin.world.block_entity_ticking.sleeping.campfire": false
     }
   }
 }
