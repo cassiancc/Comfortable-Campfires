@@ -5,10 +5,16 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.registry.entry.RegistryEntry;
+import vectorwing.farmersdelight.common.registry.ModEffects;
 
 public class CampfireModImpl {
 
+    //? if >1.21 {
     public static RegistryEntry<StatusEffect> getEffect() {
+     
+    //?} else {
+    /*public static StatusEffect getEffect() {
+        *///?}
         if (FabricLoader.getInstance().isModLoaded("farmersdelight")) {
             return FarmersDelightCompat.getComfortEffect();
         }

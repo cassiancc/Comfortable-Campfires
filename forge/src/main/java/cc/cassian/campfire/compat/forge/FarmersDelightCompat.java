@@ -1,20 +1,11 @@
-package cc.cassian.campfire.compat.fabric;
+package cc.cassian.campfire.compat.forge;
 
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.registry.entry.RegistryEntry;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 
 public class FarmersDelightCompat {
-
-    public static
-    //? if >1.21 {
-     RegistryEntry<StatusEffect> getComfortEffect() {
-        return ModEffects.COMFORT;
-    
-    //?} else {
-     /*StatusEffect getComfortEffect() {
+    public static StatusEffect getComfortEffect() {
         return ModEffects.COMFORT.get();
-
-    *///?}
     }
 }
