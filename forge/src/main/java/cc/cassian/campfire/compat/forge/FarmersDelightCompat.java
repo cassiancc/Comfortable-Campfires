@@ -1,7 +1,6 @@
 package cc.cassian.campfire.compat.forge;
 
 import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.registry.entry.RegistryEntry;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 
 public class FarmersDelightCompat {

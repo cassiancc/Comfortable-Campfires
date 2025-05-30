@@ -2,12 +2,13 @@ package cc.cassian.campfire;
 
 import cc.cassian.campfire.config.ModConfig;
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+//? if >1.21 {
 import net.minecraft.registry.entry.RegistryEntry;
+//?}
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;

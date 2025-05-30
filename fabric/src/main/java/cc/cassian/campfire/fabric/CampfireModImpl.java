@@ -4,8 +4,9 @@ import cc.cassian.campfire.compat.fabric.FarmersDelightCompat;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
+//? if >1.21 {
 import net.minecraft.registry.entry.RegistryEntry;
-import vectorwing.farmersdelight.common.registry.ModEffects;
+//?}
 
 public class CampfireModImpl {
 

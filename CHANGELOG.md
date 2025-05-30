@@ -8,9 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Config to set amplifier of effect.
-
-### Changed
-- Migrated buildscript to Stonecutter, supporting 1.19.2, 1.20.1, and 1.21.1.
+- Support for 1.21.4 and above.
 
 ## [1.1.0] - 2024-01-06
 
