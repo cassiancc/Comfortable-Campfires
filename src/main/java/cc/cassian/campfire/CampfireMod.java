@@ -27,7 +27,10 @@ public final class CampfireMod {
     }
 
     public static void applyPlayerEffects(World world, BlockPos pos) {
-        if (!world.isClient) {
+        if (!world.isClient
+        //? if >1.21.8
+            /*()*/
+        ) {
             int amplifier = ModConfig.get().amplifier;
 
             Box box = new Box(pos).expand(ModConfig.get().distance).stretch(0.0, ModConfig.get().distance, 0.0);
