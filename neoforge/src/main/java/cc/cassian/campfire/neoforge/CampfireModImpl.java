@@ -1,18 +1,18 @@
 package cc.cassian.campfire.neoforge;
 
 import cc.cassian.campfire.compat.neoforge.FarmersDelightCompat;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.core.Holder;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffects;
 import net.neoforged.fml.ModList;
 
 public class CampfireModImpl {
 
-    public static RegistryEntry<StatusEffect> getEffect() {
+    public static Holder<MobEffect> getEffect() {
         if (ModList.get().isLoaded("farmersdelight")) {
             return FarmersDelightCompat.getComfortEffect();
         }
-        else return StatusEffects.REGENERATION;
+        else return MobEffects.REGENERATION;
     }
 
 

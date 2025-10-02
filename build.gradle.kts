@@ -20,18 +20,18 @@ repositories {
     maven ( "https://api.modrinth.com/maven") // Modrinth
     maven ("https://maven.parchmentmc.org")
     maven("https://maven.wispforest.io/releases")
+    maven ( "https://repo.sleeping.town/" )
 }
 
 dependencies {
     minecraft("com.mojang:minecraft:$minecraft")
-    mappings("net.fabricmc:yarn:$minecraft+build.${mod.dep("yarn_build")}:v2")
+    mappings(loom.officialMojangMappings())
     modImplementation("net.fabricmc:fabric-loader:${mod.dep("fabric_loader")}")
     "io.github.llamalad7:mixinextras-common:${mod.dep("mixin_extras")}".let {
         annotationProcessor(it)
         implementation(it)
     }
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${mod.dep("cloth_version")}")
-}
+    implementation("folk.sisby:kaleido-config:${mod.dep("kaleido")}")}
 
 loom {
     decompilers {

@@ -1,6 +1,6 @@
 package cc.cassian.campfire;
 
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 
 import java.lang.reflect.Field;
 import java.util.function.Consumer;
@@ -10,8 +10,8 @@ import static cc.cassian.campfire.CampfireMod.MOD_ID;
 public class ModHelpers {
 
     // Automatically generate translation keys for config options.
-    public static Text fieldName(Field field) {
-        return Text.translatable("config."+MOD_ID+".config." + field.getName());
+    public static Component fieldName(Field field) {
+        return Component.translatable("config."+MOD_ID+".config." + field.getName());
     }
 
     // Get the current value of a config field.

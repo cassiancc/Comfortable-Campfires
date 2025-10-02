@@ -1,11 +1,11 @@
 package cc.cassian.campfire.compat.neoforge;
 
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.core.Holder;
+import net.minecraft.world.effect.MobEffect;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 
 public class FarmersDelightCompat {
-    public static RegistryEntry<StatusEffect> getComfortEffect() {
+    public static Holder<MobEffect> getComfortEffect() {
         return ModEffects.COMFORT;
     }
 }

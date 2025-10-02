@@ -2,16 +2,14 @@ package cc.cassian.campfire;
 
 import cc.cassian.campfire.config.ModConfig;
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
-//? if >1.21 {
-import net.minecraft.registry.entry.RegistryEntry;
-//?}
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 
 import java.util.List;
 import java.util.Objects;
@@ -21,49 +19,47 @@ import java.util.logging.Logger;
 public final class CampfireMod {
     public static final String MOD_ID = "comfortable_campfires";
     public static final Logger LOGGER = LogManager.getLogManager().getLogger("Comfortable Campfires");
+    public static final ModConfig CONFIG = ModConfig.createToml(ModConfig.configPath(), "", MOD_ID, ModConfig.class);
 
     public static void init() {
-        ModConfig.load();
+
     }
 
-    public static void applyPlayerEffects(World world, BlockPos pos) {
-        if (!world.isClient
-        //? if >1.21.8
-            /*()*/
-        ) {
-            int amplifier = ModConfig.get().amplifier;
+    public static void applyPlayerEffects(Level world, BlockPos pos) {
+        if (!world.isClientSide()) {
+            int amplifier = CONFIG.amplifier;
 
-            Box box = new Box(pos).expand(ModConfig.get().distance).stretch(0.0, ModConfig.get().distance, 0.0);
-            List<PlayerEntity> list = world.getNonSpectatingEntities(PlayerEntity.class, box);
+            AABB box = new AABB(pos).inflate(CONFIG.distance).expandTowards(0.0, CONFIG.distance, 0.0);
+            List<Player> list = world.getEntitiesOfClass(Player.class, box);
             var statusEffect = checkConfigAndGetEffect();
 
-            for (PlayerEntity playerEntity : list) {
-                if (playerEntity.hasStatusEffect(statusEffect)) {
-                    if (Objects.requireNonNull(playerEntity.getStatusEffect(statusEffect)).getDuration() < 60) {
-                        playerEntity.addStatusEffect(new StatusEffectInstance(statusEffect, ModConfig.get().duration*20, amplifier, true, true));
+            for (Player playerEntity : list) {
+                if (playerEntity.hasEffect(statusEffect)) {
+                    if (Objects.requireNonNull(playerEntity.getEffect(statusEffect)).getDuration() < 60) {
+                        playerEntity.addEffect(new MobEffectInstance(statusEffect, CONFIG.duration*20, amplifier, true, true));
                     }
                 } else {
-                    playerEntity.addStatusEffect(new StatusEffectInstance(statusEffect, ModConfig.get().duration*20, amplifier, true, true));
+                    playerEntity.addEffect(new MobEffectInstance(statusEffect, CONFIG.duration*20, amplifier, true, true));
                 }
             }
         }
     }
 
     //? if >1.21 {
-    public static RegistryEntry<StatusEffect> checkConfigAndGetEffect() {
+    public static Holder<MobEffect> checkConfigAndGetEffect() {
     //?} else {
-    /*public static StatusEffect checkConfigAndGetEffect() {
+    /*public static MobEffect checkConfigAndGetEffect() {
     *///?}
-        if (ModConfig.get().useComfort) {
+        if (CONFIG.useComfort) {
             return getEffect();
         } else {
-            return StatusEffects.REGENERATION;
+            return MobEffects.REGENERATION;
         }
     }
 
     @ExpectPlatform
     //? if >1.21 {
-    public static RegistryEntry<StatusEffect> getEffect() {
+    public static Holder<MobEffect> getEffect() {
     //?} else {
     /*public static StatusEffect getEffect() {
     *///?}

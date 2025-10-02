@@ -1,58 +1,26 @@
 package cc.cassian.campfire.config;
 
-import cc.cassian.campfire.CampfireMod;
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import folk.sisby.kaleido.api.WrappedConfig;
+import folk.sisby.kaleido.lib.quiltconfig.api.annotations.Comment;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class ModConfig {
+public class ModConfig extends WrappedConfig {
 
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-
-    private static ModConfig INSTANCE = new ModConfig();
     //General settings
+    @Comment("Maximum distance from campfire")
     public int distance = 3;
+    @Comment("Maximum duration of effect")
     public int duration = 5;
+    @Comment("Amplifier of effect")
     public int amplifier = 0;
+    @Comment("Give Comfort effect instead of Regeneration.")
     public boolean useComfort = true;
 
 
-    public static void load() {
-        if (!Files.exists(configPath())) {
-            save();
-            return;
-        }
-
-        try (var input = Files.newInputStream(configPath())) {
-            INSTANCE = GSON.fromJson(new InputStreamReader(input, StandardCharsets.UTF_8), ModConfig.class);
-        } catch (IOException e) {
-            CampfireMod.LOGGER.warning("Unable to load config file!");
-        }
-    }
-
-    public static void save() {
-        try (var output = Files.newOutputStream(configPath()); var writer = new OutputStreamWriter(output, StandardCharsets.UTF_8)) {
-            GSON.toJson(INSTANCE, writer);
-        } catch (IOException e) {
-            CampfireMod.LOGGER.warning("Unable to save config file!");
-        }
-    }
-
-    public static ModConfig get() {
-        if (INSTANCE == null) INSTANCE = new ModConfig();
-        return INSTANCE;
-    }
-
     @ExpectPlatform
-    static Path configPath() {
+    public static Path configPath() {
         throw new AssertionError();
     }
 }

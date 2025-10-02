@@ -45,20 +45,21 @@ repositories {
     maven ( "https://maven.terraformersmc.com/releases/" )
     maven ( "https://api.modrinth.com/maven")
     maven (  "https://jitpack.io")
+    maven ( "https://repo.sleeping.town/" )
 
 }
 
 dependencies {
     // Minecraft
     minecraft("com.mojang:minecraft:$minecraft")
-    mappings("net.fabricmc:yarn:$minecraft+build.${common.mod.dep("yarn_build")}:v2")
+    mappings(loom.officialMojangMappings())
 
     // Fabric
     modImplementation("net.fabricmc:fabric-loader:${mod.dep("fabric_loader")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${common.mod.dep("fabric_api")}")
 
-    // Cloth Config
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${common.mod.dep("cloth_version")}")
+    implementation("folk.sisby:kaleido-config:${mod.dep("kaleido")}")
+    include("folk.sisby:kaleido-config:${mod.dep("kaleido")}")
 
     // Mod Menu
     modApi("com.terraformersmc:modmenu:${common.mod.dep("modmenu_version")}")

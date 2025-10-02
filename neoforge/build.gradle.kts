@@ -47,24 +47,21 @@ repositories {
     maven ( "https://cursemaven.com" )
     maven ( "https://maven.wispforest.io/releases" )
     maven ( "https://maven.su5ed.dev/releases" )
+    maven ( "https://repo.sleeping.town/" )
+
 }
 
 dependencies {
     minecraft("com.mojang:minecraft:$minecraft")
-    mappings(loom.layered {
-        mappings("net.fabricmc:yarn:$minecraft+build.${common.mod.dep("yarn_build")}:v2")
-        common.mod.dep("neoforge_patch").takeUnless { it.startsWith('[') }?.let {
-            mappings("dev.architectury:yarn-mappings-patch-neoforge:$it")
-        }
-    })
+    mappings(loom.officialMojangMappings())
     "neoForge"("net.neoforged:neoforge:${common.mod.dep("neoforge_loader")}")
     "io.github.llamalad7:mixinextras-neoforge:${mod.dep("mixin_extras")}".let {
         implementation(it)
         include(it)
     }
 
-    // Cloth Config
-    modApi("me.shedaniel.cloth:cloth-config-neoforge:${common.mod.dep("cloth_version")}")
+    implementation("folk.sisby:kaleido-config:${mod.dep("kaleido")}")
+    include("folk.sisby:kaleido-config:${mod.dep("kaleido")}")
 
     // Farmer's Delight
     if (stonecutter.eval(mcVersion, ">1.21.1")) {
