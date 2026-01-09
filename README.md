@@ -10,7 +10,7 @@ Comfortable Campfires can either be installed only on the server, or on the clie
 ## Installation
 
 Comfortable Campfires is a serverside mod for Fabric and Forge.
-- On Fabric, [Farmer's Delight (Fabric)](https://modrinth.com/mod/farmers-delight-fabric) is recommended.
+- On Fabric, [Farmer's Delight Refabricated](https://modrinth.com/mod/farmers-delight-refabricated) is recommended.
 - On Forge, [Farmer's Delight](https://modrinth.com/mod/farmers-delight) is recommended.
 
 If Farmer's Delight is not installed, regeneration will be applied instead of comfort.

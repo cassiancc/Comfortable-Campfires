@@ -19,10 +19,9 @@ public class CampfireBlockEntityMixin {
     @Inject(method = "cookTick", at = @At(value = "HEAD"))
     //? if >1.21.2 {
     private static void mixin(ServerLevel serverLevel, BlockPos pos, BlockState blockState, CampfireBlockEntity campfireBlockEntity, RecipeManager.CachedCheck<SingleRecipeInput, CampfireCookingRecipe> cachedCheck, CallbackInfo ci)
-
-        //?} else {
-        /*private static void mixin(ServerLevel world, BlockPos pos, BlockState state, CampfireBlockEntity campfire, CallbackInfo ci)
-         *///?}
+    //?} else {
+    /*private static void mixin(ServerLevel world, BlockPos pos, BlockState state, CampfireBlockEntity campfire, CallbackInfo ci)
+     *///?}
     {
         applyPlayerEffects(serverLevel, pos);
     }

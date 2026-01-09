@@ -1,7 +1,7 @@
 package cc.cassian.campfire;
 
+import cc.cassian.campfire.compat.FarmersDelightCompat;
 import cc.cassian.campfire.config.ModConfig;
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
@@ -19,11 +19,7 @@ import java.util.logging.Logger;
 public final class CampfireMod {
     public static final String MOD_ID = "comfortable_campfires";
     public static final Logger LOGGER = LogManager.getLogManager().getLogger("Comfortable Campfires");
-    public static final ModConfig CONFIG = ModConfig.createToml(ModConfig.configPath(), "", MOD_ID, ModConfig.class);
-
-    public static void init() {
-
-    }
+    public static final ModConfig CONFIG = ModConfig.createToml(Platform.INSTANCE.getConfigFolder(), "", MOD_ID, ModConfig.class);
 
     public static void applyPlayerEffects(Level world, BlockPos pos) {
         if (!world.isClientSide()) {
@@ -45,11 +41,7 @@ public final class CampfireMod {
         }
     }
 
-    //? if >1.21 {
     public static Holder<MobEffect> checkConfigAndGetEffect() {
-    //?} else {
-    /*public static MobEffect checkConfigAndGetEffect() {
-    *///?}
         if (CONFIG.useComfort) {
             return getEffect();
         } else {
@@ -57,13 +49,11 @@ public final class CampfireMod {
         }
     }
 
-    @ExpectPlatform
-    //? if >1.21 {
     public static Holder<MobEffect> getEffect() {
-    //?} else {
-    /*public static StatusEffect getEffect() {
-    *///?}
-        throw new AssertionError();
+        if (Platform.INSTANCE.isModLoaded("farmersdelight")) {
+            return FarmersDelightCompat.getComfortEffect();
+        }
+        else return MobEffects.REGENERATION;
     }
 
 }
