@@ -3,9 +3,6 @@ package cc.cassian.campfire.fabric;
 //? fabric {
 /*import cc.cassian.campfire.Platform;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.projectile.FishingHook;
-
 import java.nio.file.Path;
 
 public class FabricPlatformImpl implements Platform {

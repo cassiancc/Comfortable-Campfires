@@ -164,8 +164,6 @@ dependencies {
     minecraft("com.mojang:minecraft:${property("deps.minecraft")}")
     implementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
 
-    implementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric-api")}")
-
     implementation("folk.sisby:kaleido-config:${property("deps.kaleido")}")
     include("folk.sisby:kaleido-config:${property("deps.kaleido")}")
     compileOnly("maven.modrinth:farmers-delight:${property("deps.fd")}")
