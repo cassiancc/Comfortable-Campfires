@@ -163,9 +163,11 @@ repositories {
 dependencies {
     minecraft("com.mojang:minecraft:${property("deps.minecraft")}")
     implementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
+    implementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
     implementation("folk.sisby:kaleido-config:${property("deps.kaleido")}")
     include("folk.sisby:kaleido-config:${property("deps.kaleido")}")
+    implementation("com.terraformersmc:modmenu:${property("deps.modmenu")}")
     compileOnly("maven.modrinth:farmers-delight:${property("deps.fd")}")
 
 
@@ -179,7 +181,7 @@ configurations.all {
 
 stonecutter {
     replacements.string {
-        direction = eval(current.version, ">1.21")
+        direction = eval(current.version, ">1.21.10")
         replace("ResourceLocation", "Identifier")
     }
 }
@@ -203,8 +205,8 @@ loom.runs.named("server") {
 
 java {
     withSourcesJar()
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
 
 val additionalVersionsStr = findProperty("publish.additionalVersions") as String?
@@ -230,9 +232,8 @@ publishMods {
         accessToken = env.MODRINTH_API_KEY.orNull()
         minecraftVersions.add(property("deps.minecraft").toString())
         minecraftVersions.addAll(additionalVersions)
-        requires("fabric-api")
         optional("farmers-delight-refabricated")
-        optional("mcqoy")
+        optional("qomc")
     }
 
     curseforge {
@@ -240,6 +241,6 @@ publishMods {
         accessToken = env.CURSEFORGE_API_KEY.orNull()
         minecraftVersions.add(stonecutter.current.version)
         minecraftVersions.addAll(additionalVersions)
-        requires("fabric-api")
+        optional("qomc")
     }
 }

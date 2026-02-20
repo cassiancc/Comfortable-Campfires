@@ -2,7 +2,7 @@ package cc.cassian.campfire.neoforge;
 
 //? neoforge {
 
-import cc.cassian.campfire.Platform;
+/*import cc.cassian.campfire.Platform;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLEnvironment;
@@ -29,4 +29,4 @@ public class NeoforgePlatformImpl implements Platform {
     }
 
 }
-//?}
+*///?}

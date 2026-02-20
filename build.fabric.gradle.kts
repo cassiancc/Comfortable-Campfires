@@ -87,7 +87,6 @@ repositories {
             }
         }
         filter {
-            includeGroupAndSubgroups("dev.isxander")
             includeGroupAndSubgroups("org.quiltmc.parsers")
         }
     }
@@ -152,7 +151,7 @@ repositories {
     exclusiveContent {
         forRepository {
             maven {
-                name = "Greenhouse Maven"
+                name = "Fabric ASM"
                 url = uri("https://jitpack.io")
             }
         }
@@ -178,6 +177,7 @@ repositories {
             includeGroupAndSubgroups("cc.cassian")
         }
     }
+    mavenCentral()
 }
 
 dependencies {
@@ -190,24 +190,21 @@ dependencies {
             mappings("dev.lambdaurora:yalmm-mojbackward:${property("deps.minecraft")}+build.${property("deps.mojbackward")}")
     })
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
-    modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric-api")}")
+    modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
     // Kaleido
     implementation("folk.sisby:kaleido-config:${property("deps.kaleido")}")
     include("folk.sisby:kaleido-config:${property("deps.kaleido")}")
-    modImplementation( "maven.modrinth:mcqoy:adCKjC4q")
+    modImplementation("maven.modrinth:mcqoy:HhfnomCg")
+    modImplementation("maven.modrinth:qomc:${property("deps.qomc")}")
 
     // Cloth Config
     if (hasProperty("deps.cloth_config")) {
         modImplementation("me.shedaniel.cloth:cloth-config-fabric:${property("deps.cloth_config")}")
-    } else {
-        modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:19.0.147")
     }
     // Mod Menu
-    if (hasProperty("deps.modmenu"))
-        modApi("com.terraformersmc:modmenu:${property("deps.modmenu")}")
-    else {
-        modCompileOnly("com.terraformersmc:modmenu:15.0.0-beta.3")
-    }
+    modApi("com.terraformersmc:modmenu:${property("deps.modmenu")}")
+    modCompileOnly("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-fabric")
+    modLocalRuntime("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-fabric")
 
     // Farmer's Delight
     modImplementation("maven.modrinth:farmers-delight-refabricated:${property("deps.fd")}") {
@@ -229,7 +226,7 @@ dependencies {
 
 stonecutter {
     replacements.string {
-        direction = eval(current.version, ">1.21")
+        direction = eval(current.version, ">1.21.10")
         replace("ResourceLocation", "Identifier")
     }
 }
@@ -280,10 +277,8 @@ publishMods {
         accessToken = env.MODRINTH_API_KEY.orNull()
         minecraftVersions.add(stonecutter.current.version)
         minecraftVersions.addAll(additionalVersions)
-        requires("fabric-api")
         optional("farmers-delight-refabricated")
-        optional("mcqoy")
-
+        optional("qomc")
     }
 
     curseforge {
@@ -291,7 +286,7 @@ publishMods {
         accessToken = env.CURSEFORGE_API_KEY.orNull()
         minecraftVersions.add(stonecutter.current.version)
         minecraftVersions.addAll(additionalVersions)
-        requires("fabric-api")
         optional("farmers-delight-refabricated")
+        optional("qomc")
     }
 }

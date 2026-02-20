@@ -1,7 +1,7 @@
 package cc.cassian.campfire.fabric;
 
 //? fabric {
-/*import cc.cassian.campfire.Platform;
+import cc.cassian.campfire.Platform;
 import net.fabricmc.loader.api.FabricLoader;
 import java.nio.file.Path;
 
@@ -23,4 +23,4 @@ public class FabricPlatformImpl implements Platform {
 
 
 }
-*///?}
+//?}

@@ -18,6 +18,11 @@
   "mixins": [
     "comfortable_campfires.mixins.json"
   ],
+  "entrypoints": {
+    "main": [
+      "cc.cassian.campfire.fabric.FabricEntrypoint"
+    ]
+  },
   "depends": {
     "fabricloader": ">=0.16.7",
     "minecraft": "${minecraft}",

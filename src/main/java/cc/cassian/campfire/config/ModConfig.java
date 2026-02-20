@@ -2,8 +2,9 @@ package cc.cassian.campfire.config;
 
 import folk.sisby.kaleido.api.WrappedConfig;
 import folk.sisby.kaleido.lib.quiltconfig.api.annotations.Comment;
+import folk.sisby.kaleido.lib.quiltconfig.api.values.ValueMap;
 
-import java.nio.file.Path;
+import java.util.Map;
 
 public class ModConfig extends WrappedConfig {
 
@@ -14,6 +15,6 @@ public class ModConfig extends WrappedConfig {
     public int duration = 5;
     @Comment("Amplifier of effect")
     public int amplifier = 0;
-    @Comment("Give Comfort effect instead of Regeneration.")
-    public boolean useComfort = true;
+    @Comment("What effects should be applied")
+    public Map<String, String> effects = ValueMap.builder("").put("minecraft:campfire", "farmersdelight:nourishment").build();
 }

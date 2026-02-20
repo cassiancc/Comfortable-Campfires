@@ -5,6 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.CampfireBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,12 +19,12 @@ import static cc.cassian.campfire.CampfireMod.applyPlayerEffects;
 public class CampfireBlockEntityMixin {
     @Inject(method = "cookTick", at = @At(value = "HEAD"))
     //? if >1.21.2 {
-    private static void mixin(ServerLevel serverLevel, BlockPos pos, BlockState blockState, CampfireBlockEntity campfireBlockEntity, RecipeManager.CachedCheck<SingleRecipeInput, CampfireCookingRecipe> cachedCheck, CallbackInfo ci)
+    private static void mixin(ServerLevel level, BlockPos pos, BlockState blockState, CampfireBlockEntity campfireBlockEntity, RecipeManager.CachedCheck<SingleRecipeInput, CampfireCookingRecipe> cachedCheck, CallbackInfo ci)
     //?} else {
-    /*private static void mixin(ServerLevel world, BlockPos pos, BlockState state, CampfireBlockEntity campfire, CallbackInfo ci)
+    /*private static void mixin(Level level, BlockPos pos, BlockState blockState, CampfireBlockEntity campfire, CallbackInfo ci)
      *///?}
     {
-        applyPlayerEffects(serverLevel, pos);
+        applyPlayerEffects(level, pos, blockState);
     }
 
 }
