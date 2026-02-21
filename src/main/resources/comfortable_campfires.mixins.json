@@ -1,6 +1,7 @@
 {
   "required": true,
   "package": "cc.cassian.campfire.mixin",
+  "refmap": "comfortable_campfires.refmap.json",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "mixins": [

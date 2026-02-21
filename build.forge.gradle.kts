@@ -1,5 +1,5 @@
 plugins {
-    id("net.neoforged.moddev")
+    id("net.neoforged.moddev.legacyforge")
     id("dev.kikugie.postprocess.jsonlang")
     id("me.modmuss50.mod-publish-plugin")
     id("maven-publish")
@@ -13,7 +13,7 @@ tasks.named<ProcessResources>("processResources") {
 
     val props = HashMap<String, String>().apply {
         this["version"] = prop("mod.version") + "+" + prop("deps.minecraft")
-        this["minecraft"] = prop("mod.mc_dep_forge")
+        this["minecraft"] = prop("deps.minecraft")
     }
 
     filesMatching(listOf("neoforge.mod.json", "META-INF/neoforge.mods.toml", "META-INF/mods.toml")) {
@@ -21,7 +21,7 @@ tasks.named<ProcessResources>("processResources") {
     }
 }
 
-version = "${property("mod.version")}+${property("deps.minecraft")}-neoforge"
+version = "${property("mod.version")}+${property("deps.minecraft")}-forge"
 base.archivesName = property("mod.id") as String
 
 jsonlang {
@@ -32,20 +32,6 @@ jsonlang {
 
 repositories {
     mavenLocal()
-    maven {
-        name = "Terraformers (Mod Menu)"
-        url = uri("https://maven.terraformersmc.com/releases/")
-        content {
-            includeGroupAndSubgroups("com.terraformersmc")
-        }
-    }
-    maven {
-        name = "Wisp Forest Maven"
-        url = uri("https://maven.wispforest.io/releases/")
-        content {
-            includeGroupAndSubgroups("io.wispforest")
-        }
-    }
     maven {
         name = "Modrinth"
         url = uri("https://api.modrinth.com/maven")
@@ -83,40 +69,10 @@ repositories {
             includeGroupAndSubgroups("org.quiltmc.parsers")
         }
     }
-    maven {
-        name = "Nucleoid Maven (Polymer)"
-        url = uri("https://maven.nucleoid.xyz")
-        content {
-            includeGroupAndSubgroups("eu.pb4")
-            includeGroupAndSubgroups("xyz.nucleoid")
-        }
-    }
-    maven {
-        name = "Fuzs Mod Resources"
-        url = uri("https://raw.githubusercontent.com/Fuzss/modresources/main/maven/")
-        content {
-            includeGroupAndSubgroups("fuzs")
-        }
-    }
-    maven {
-        name = "Kotlin for Forge"
-        url = uri("https://thedarkcolour.github.io/KotlinForForge/")
-        content {
-            includeGroupAndSubgroups("thedarkcolour")
-        }
-    }
-    flatDir { dirs("libs") }
 }
 
-stonecutter {
-    replacements.string {
-        direction = eval(current.version, ">1.21.10")
-        replace("ResourceLocation", "Identifier")
-    }
-}
-
-neoForge {
-    version = property("deps.neoforge") as String
+legacyForge {
+    version = property("deps.forge") as String
     validateAccessTransformers = true
 
     if (hasProperty("deps.parchment")) parchment {
@@ -144,9 +100,42 @@ neoForge {
     sourceSets["main"].resources.srcDir("src/main/generated")
 }
 
+
+dependencies {
+
+    implementation("folk.sisby:kaleido-config:${property("deps.kaleido")}")
+    jarJar("folk.sisby:kaleido-config:${property("deps.kaleido")}")
+    modImplementation("maven.modrinth:mcqoy:HhfnomCg")
+    modImplementation("maven.modrinth:qomc:${property("deps.qomc")}")
+}
+
+
+mixin {
+    add(sourceSets["main"], "comfortable_campfires.refmap.json")
+    config("comfortable_campfires.mixins.json")
+}
+
+dependencies {
+}
+
+tasks.named<Jar>("jar") {
+    manifest {
+        attributes(
+            "MixinConfigs" to "comfortable_campfires.mixins.json"
+        )
+    }
+}
+
+stonecutter {
+    replacements.string {
+        direction = eval(current.version, ">1.21.10")
+        replace("ResourceLocation", "Identifier")
+    }
+}
+
 tasks {
     processResources {
-        exclude("**/neoforge.mod.json", "**/*.accesswidener", "**/mods.toml")
+        exclude("**/fabric.mod.json", "**/*.accesswidener", "**/neoforge.mods.toml")
     }
 
     named("createMinecraftArtifacts") {
@@ -161,35 +150,10 @@ tasks {
     }
 }
 
-dependencies {
-    implementation("folk.sisby:kaleido-config:${property("deps.kaleido")}")
-    jarJar("folk.sisby:kaleido-config:${property("deps.kaleido")}")
-    if (stonecutter.eval(mcVersion, "<1.21.9")) {
-        "additionalRuntimeClasspath"("folk.sisby:kaleido-config:${property("deps.kaleido")}")
-    }
-
-
-
-    // YACL
-    if (hasProperty("deps.yacl")) {
-        compileOnly("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-neoforge")
-        compileOnly("thedarkcolour:kotlinforforge-neoforge:5.10.0")
-    } else {
-        compileOnly("dev.isxander:yet-another-config-lib:3.8.0+1.21.9-neoforge")
-    }
-
-    compileOnly("maven.modrinth:farmers-delight:${property("deps.fd")}")
-
-
-}
 
 java {
     withSourcesJar()
-    val javaCompat = if (stonecutter.eval(stonecutter.current.version, ">26")) {
-        JavaVersion.VERSION_25
-    } else {
-        JavaVersion.VERSION_21
-    }
+    val javaCompat = JavaVersion.VERSION_17
     sourceCompatibility = javaCompat
     targetCompatibility = javaCompat
 }
@@ -202,14 +166,14 @@ val additionalVersions: List<String> = additionalVersionsStr
     ?: emptyList()
 
 publishMods {
-    file = tasks.jar.map { it.archiveFile.get() }
+    file = (tasks.named<org.gradle.jvm.tasks.Jar>("reobfJar").map { it.archiveFile.get() })
     additionalFiles.from(tasks.named<org.gradle.jvm.tasks.Jar>("sourcesJar").map { it.archiveFile.get() })
 
-    type = STABLE
-    displayName = "${property("mod.name")} ${property("mod.version")} for ${stonecutter.current.version} Neoforge"
-    version = "${property("mod.version")}+${property("deps.minecraft")}-neoforge"
+    type = BETA
+    displayName = "${property("mod.name")} ${property("mod.version")} for ${stonecutter.current.version} Forge"
+    version = "${property("mod.version")}+${property("deps.minecraft")}-forge"
     changelog = provider { rootProject.file("CHANGELOG-LATEST.md").readText() }
-    modLoaders.add("neoforge")
+    modLoaders.add("forge")
 
     modrinth {
         projectId = property("publish.modrinth") as String

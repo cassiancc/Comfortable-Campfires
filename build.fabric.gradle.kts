@@ -79,14 +79,11 @@ repositories {
             includeGroupAndSubgroups("org.parchmentmc")
         }
     }
-    exclusiveContent {
-        forRepository {
-            maven {
-                name = "Xander Maven"
-                url = uri("https://maven.isxander.dev/releases")
-            }
-        }
-        filter {
+    maven {
+        name = "Xander Maven"
+        url = uri("https://maven.isxander.dev/releases")
+        content {
+            includeGroupAndSubgroups("dev.isxander")
             includeGroupAndSubgroups("org.quiltmc.parsers")
         }
     }
@@ -177,6 +174,36 @@ repositories {
             includeGroupAndSubgroups("cc.cassian")
         }
     }
+    maven {
+        name = "Fabricators of Create (Snapshots)"
+        url = uri("https://mvn.devos.one/snapshots")
+        content {
+            includeGroupAndSubgroups("net.createmod")
+            includeGroupAndSubgroups("dev.engine-room")
+            includeGroupAndSubgroups("io.github.fabricators_of_create")
+            includeGroupAndSubgroups("com.simibubi")
+            includeGroupAndSubgroups("com.tterrag")
+            includeGroupAndSubgroups("io.github.tropheusj")
+        }
+    }
+    maven {
+        name = "Fabricators of Create (Releases)"
+        url = uri("https://mvn.devos.one/releases")
+        content {
+            includeGroupAndSubgroups("net.createmod")
+            includeGroupAndSubgroups("dev.engine-room")
+            includeGroupAndSubgroups("io.github.fabricators_of_create")
+            includeGroupAndSubgroups("com.simibubi")
+            includeGroupAndSubgroups("com.tterrag")
+        }
+    }
+    maven {
+        name = "reach-entity-attributes"
+        url = uri("https://maven.jamieswhiteshirt.com/libs-release")
+        content {
+            includeGroupAndSubgroups("com.jamieswhiteshirt")
+        }
+    }
     mavenCentral()
 }
 
@@ -213,6 +240,10 @@ dependencies {
     }
     modImplementation("com.github.Chocohead:Fabric-ASM:${property("deps.fabric_asm")}") {
         exclude (group = "net.fabricmc.fabric-api")
+    }
+    if (hasProperty("deps.porting_lib")) {
+        val modules = listOf("accessors", "asm", "base", "brewing", "client_events", "mixin_extensions", "model_builders", "model_generators", "model_loader", "model_materials", "models", "networking", "obj_loader", "recipe_book_categories", "tags")
+        for (it in modules) modImplementation("io.github.fabricators_of_create.Porting-Lib:$it:"+property("deps.porting_lib"))
     }
 
 }

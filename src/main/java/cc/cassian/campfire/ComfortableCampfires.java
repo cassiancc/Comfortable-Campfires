@@ -20,7 +20,7 @@ import java.util.Optional;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-public final class CampfireMod {
+public final class ComfortableCampfires {
     public static final String MOD_ID = "comfortable_campfires";
     public static final Logger LOGGER = LogManager.getLogManager().getLogger("Comfortable Campfires");
     public static final ModConfig CONFIG = ModConfig.createToml(Platform.INSTANCE.getConfigFolder(), "", MOD_ID, ModConfig.class);
@@ -45,10 +45,15 @@ public final class CampfireMod {
         }
     }
 
-    public static Holder<MobEffect> checkConfigAndGetEffect(BlockState blockState) {
+    public static
+    //? if >1.21 {
+    Holder<MobEffect>
+    //?} else
+    /*MobEffect*/
+    checkConfigAndGetEffect(BlockState blockState) {
         var id = BuiltInRegistries.BLOCK.getKey(blockState.getBlock()).toString();
         if (CONFIG.effects.containsKey(id)) {
-			Optional<Holder.Reference<MobEffect>> result = getFromRegistry(BuiltInRegistries.MOB_EFFECT, Identifier.parse(CONFIG.effects.get(id)));
+			var result = getFromRegistry(BuiltInRegistries.MOB_EFFECT, parse(CONFIG.effects.get(id)));
             if (result.isPresent()) {
                 return result.get();
             }
@@ -65,9 +70,21 @@ public final class CampfireMod {
     static <T> Optional<Holder.Reference<T>> getFromRegistry(Registry<T> registry, Identifier name) {
         return registry.get(name);
     }
-    //?} else {
+    //?} else if >1.21 {
     /*static <T> Optional<Holder.Reference<T>> getFromRegistry(Registry<T> registry, Identifier name) {
         return registry.getHolder(name);
     }
+    *///?} else {
+    /*static <T> Optional<T> getFromRegistry(Registry<T> registry, Identifier name) {
+        return registry.getOptional(name);
+    }
     *///?}
+
+    public static Identifier parse(String string) {
+        //? if >1.21 {
+        return Identifier.parse(string);
+        //?} else {
+        /*return new Identifier(string);
+        *///?}
+    }
 }
