@@ -16,5 +16,5 @@ public class ModConfig extends WrappedConfig {
     @Comment("Amplifier of effect")
     public int amplifier = 0;
     @Comment("What effects should be applied")
-    public Map<String, String> effects = ValueMap.builder("").put("minecraft:campfire", "farmersdelight:nourishment").build();
+    public Map<String, String> effects = ValueMap.builder("").put("minecraft:campfire", "farmersdelight:nourishment").put("minecraft:soul_campfire", "farmersdelight:nourishment").build();
 }

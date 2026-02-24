@@ -45,18 +45,6 @@ repositories {
     exclusiveContent {
         forRepository {
             maven {
-                name = "shedaniel (Cloth Config)"
-                url = uri("https://maven.shedaniel.me/")
-            }
-        }
-        filter {
-            includeGroupAndSubgroups("me.shedaniel")
-
-        }
-    }
-    exclusiveContent {
-        forRepository {
-            maven {
                 name = "Terraformers (Mod Menu)"
                 url = uri("https://maven.terraformersmc.com/releases/")
             }
