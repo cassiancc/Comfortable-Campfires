@@ -3,7 +3,7 @@
   "id": "comfortable_campfires",
   "version": "${version}",
   "name": "Comfortable Campfires",
-  "description": "Sitting by the campfire is now just a little more comfortable. Lit campfires now give nearby players Regeneration or Farmer's Delight's Nourishment.",
+  "description": "Sitting by the campfire is now just a little more comfortable. Lit campfires now give nearby players Regeneration or a configured effect.",
   "authors": [
     "cassiancc"
   ],
