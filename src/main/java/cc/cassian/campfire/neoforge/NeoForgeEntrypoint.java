@@ -7,6 +7,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.event.server.ServerLifecycleEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import static cc.cassian.campfire.ComfortableCampfires.MOD_ID;
 
@@ -23,5 +24,9 @@ public class NeoForgeEntrypoint {
 		ComfortableCampfires.populateEffectMap();
 	}
 
+	@SubscribeEvent
+	public static void tickCampfire(PlayerTickEvent.Post event) {
+		ComfortableCampfires.applyPlayerEffects(event.getEntity());
+	}
 }
 *///?}

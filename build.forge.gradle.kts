@@ -107,6 +107,8 @@ dependencies {
     jarJar("folk.sisby:kaleido-config:${property("deps.kaleido")}")
     modImplementation("maven.modrinth:mcqoy:HhfnomCg")
     modImplementation("maven.modrinth:qomc:${property("deps.qomc")}")
+
+    annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
 }
 
 

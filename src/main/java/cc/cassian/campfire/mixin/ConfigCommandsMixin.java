@@ -18,7 +18,7 @@ import static cc.cassian.campfire.ComfortableCampfires.*;
 @Mixin(ConfigCommands.class)
 public class ConfigCommandsMixin {
 
-	@Inject(method = "configSetMap", at = @At(value = "RETURN"))
+	@Inject(method = "configSetMap", remap = false, at = @At(value = "RETURN"))
 	private static <T> void mixin(CommandContext<CommandSourceStack> ctx, TrackedValue<ValueMap<T>> value, String key, T item, ValueType childType, CallbackInfoReturnable<Integer> cir)
 	{
 		if (ctx.getInput().contains("comfortable_campfires")) {

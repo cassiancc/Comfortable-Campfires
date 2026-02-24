@@ -1,6 +1,7 @@
 package cc.cassian.campfire;
 
 import cc.cassian.campfire.config.ModConfig;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -8,10 +9,12 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,18 +32,28 @@ public final class ComfortableCampfires {
             > EFFECT_MAP = new LinkedHashMap<>();
 
 
-    public static void applyPlayerEffects(Level world, BlockState blockState, Player playerEntity) {
+    public static void applyPlayerEffects(Player player) {
+        if (player.isLocalPlayer()) return;
+        AABB box = new AABB(BlockPos.containing(player.position())).inflate(CONFIG.distance).expandTowards(0.0, CONFIG.distance, 0.0);
+        player.level().getBlockStatesIfLoaded(box).forEach(blockState -> {
+            if (EFFECT_MAP.containsKey(blockState.getBlock())) {
+                applyPlayerEffects(player.level(), blockState, player);
+            }
+        });
+    }
+
+    private static void applyPlayerEffects(Level world, BlockState blockState, LivingEntity livingEntity) {
         if (!world.isClientSide()) {
             int amplifier = CONFIG.amplifier;
 
             var statusEffect = checkConfigAndGetEffect(blockState);
 
-            if (playerEntity.hasEffect(statusEffect)) {
-                if (Objects.requireNonNull(playerEntity.getEffect(statusEffect)).getDuration() < 60) {
-                    playerEntity.addEffect(new MobEffectInstance(statusEffect, CONFIG.duration*20, amplifier, true, true));
+            if (livingEntity.hasEffect(statusEffect)) {
+                if (Objects.requireNonNull(livingEntity.getEffect(statusEffect)).getDuration() < 60) {
+                    livingEntity.addEffect(new MobEffectInstance(statusEffect, CONFIG.duration*20, amplifier, true, true));
                 }
             } else {
-                playerEntity.addEffect(new MobEffectInstance(statusEffect, CONFIG.duration*20, amplifier, true, true));
+                livingEntity.addEffect(new MobEffectInstance(statusEffect, CONFIG.duration*20, amplifier, true, true));
             }
         }
     }

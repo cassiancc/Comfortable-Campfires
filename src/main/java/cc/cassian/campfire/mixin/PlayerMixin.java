@@ -26,15 +26,12 @@ public abstract class PlayerMixin extends Player {
     }
     *///?}
 
+    //? fabric {
     @Inject(method = "tick", at = @At(value = "HEAD"))
     private void mixin(CallbackInfo ci)
     {
-        AABB box = new AABB(BlockPos.containing(position())).inflate(CONFIG.distance).expandTowards(0.0, CONFIG.distance, 0.0);
-        level().getBlockStatesIfLoaded(box).forEach(blockState -> {
-            if (EFFECT_MAP.containsKey(blockState.getBlock())) {
-                applyPlayerEffects(level(), blockState, this);
-            }
-        });
+        applyPlayerEffects(this);
     }
+    //?}
 
 }
