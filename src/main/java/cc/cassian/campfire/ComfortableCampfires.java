@@ -14,6 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,6 +38,7 @@ public final class ComfortableCampfires {
         AABB box = new AABB(BlockPos.containing(player.position())).inflate(CONFIG.distance).expandTowards(0.0, CONFIG.distance, 0.0);
         player.level().getBlockStatesIfLoaded(box).forEach(blockState -> {
             if (EFFECT_MAP.containsKey(blockState.getBlock())) {
+                if (blockState.hasProperty(BlockStateProperties.LIT) && !blockState.getValue(BlockStateProperties.LIT)) return;
                 applyPlayerEffects(player.level(), blockState, player);
             }
         });
