@@ -151,14 +151,17 @@ repositories {
 dependencies {
     minecraft("com.mojang:minecraft:${property("deps.minecraft")}")
     implementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
-    implementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
+//    implementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
     implementation("folk.sisby:kaleido-config:${property("deps.kaleido")}")
     include("folk.sisby:kaleido-config:${property("deps.kaleido")}")
     compileOnly("maven.modrinth:qomc:${property("deps.qomc")}")
-    implementation("com.terraformersmc:modmenu:${property("deps.modmenu")}")
+    compileOnly("com.terraformersmc:modmenu:${property("deps.modmenu")}")
     compileOnly("maven.modrinth:farmers-delight:${property("deps.fd")}")
 
+
+    val modules = listOf("lifecycle-events-v1", "transitive-access-wideners-v1", "registry-sync-v0", "resource-loader-v0")
+    for (it in modules) implementation(fabricApi.module("fabric-$it", property("deps.fabric_api") as String))
 
 }
 

@@ -25,15 +25,11 @@
   },
   "depends": {
     "fabricloader": ">=0.16.7",
+    "fabric-lifecycle-events-v1": "*",
     "minecraft": "${minecraft}",
     "java": ">=17"
   },
   "recommends": {
     "farmersdelight": "*"
-  },
-  "custom": {
-    "lithium:options": {
-      "mixin.world.block_entity_ticking.sleeping.campfire": false
-    }
   }
 }

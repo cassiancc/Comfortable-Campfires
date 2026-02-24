@@ -29,6 +29,3 @@ side = "BOTH"
 
 [[mixins]]
 config = "comfortable_campfires.mixins.json"
-
-["lithium:options"]
-"mixin.world.block_entity_ticking.sleeping.campfire" = false
