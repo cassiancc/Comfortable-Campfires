@@ -11,7 +11,7 @@ tasks.named<ProcessResources>("processResources") {
 
     val props = HashMap<String, String>().apply {
         this["version"] = prop("mod.version") + "+" + prop("deps.minecraft")
-        this["minecraft"] = prop("deps.minecraft")
+        this["minecraft"] = prop("mod.mc_dep_fabric")
     }
 
     filesMatching(listOf("fabric.mod.json", "META-INF/neoforge.mods.toml", "META-INF/mods.toml")) {
@@ -234,7 +234,7 @@ dependencies {
     modLocalRuntime("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-fabric")
 
     // Farmer's Delight
-    modImplementation("maven.modrinth:farmers-delight-refabricated:${property("deps.fd")}") {
+    modCompileOnly("maven.modrinth:farmers-delight-refabricated:${property("deps.fd")}") {
         exclude(group = "net.fabricmc")
         exclude(group = "me.shedaniel")
     }

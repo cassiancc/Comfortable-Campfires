@@ -26,7 +26,7 @@ public final class ComfortableCampfires {
     public static final Logger LOGGER = LogManager.getLogger("Comfortable Campfires");
     public static final ModConfig CONFIG = ModConfig.createToml(Platform.INSTANCE.getConfigFolder(), "", MOD_ID, ModConfig.class);
     public static final LinkedHashMap<Block,
-            //? if >1.21 {
+            //? if >1.20.4 {
             Holder<MobEffect>
             //?} else
             /*MobEffect*/
@@ -69,12 +69,12 @@ public final class ComfortableCampfires {
             if (blockHolder.isPresent()) {
                 if (effect.isPresent())
                     EFFECT_MAP.put(blockHolder.get()
-                            //? if >1.21
+                            //? if >1.20.4
                             .value()
                             , effect.get());
                 else
                     EFFECT_MAP.put(blockHolder.get()
-                            //? if >1.21
+                            //? if >1.20.4
                             .value()
                             , MobEffects.REGENERATION);
             }
@@ -82,7 +82,7 @@ public final class ComfortableCampfires {
     }
 
     public static
-    //? if >1.21 {
+    //? if >1.20.4 {
     Holder<MobEffect>
     //?} else
     /*MobEffect*/
@@ -99,7 +99,7 @@ public final class ComfortableCampfires {
     static <T> Optional<Holder.Reference<T>> getFromRegistry(Registry<T> registry, Identifier name) {
         return registry.get(name);
     }
-    //?} else if >1.21 {
+    //?} else if >1.20.4 {
     /*static <T> Optional<Holder.Reference<T>> getFromRegistry(Registry<T> registry, Identifier name) {
         return registry.getHolder(name);
     }
