@@ -167,6 +167,7 @@ dependencies {
 
     implementation("folk.sisby:kaleido-config:${property("deps.kaleido")}")
     include("folk.sisby:kaleido-config:${property("deps.kaleido")}")
+    compileOnly("maven.modrinth:qomc:${property("deps.qomc")}")
     implementation("com.terraformersmc:modmenu:${property("deps.modmenu")}")
     compileOnly("maven.modrinth:farmers-delight:${property("deps.fd")}")
 

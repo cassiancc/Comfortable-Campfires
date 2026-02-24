@@ -15,16 +15,23 @@ import static cc.cassian.campfire.ComfortableCampfires.*;
 
 @Mixin(ServerPlayer.class)
 public abstract class PlayerMixin extends Player {
+
+    //? if >1.21.2 {
     public PlayerMixin(Level level, GameProfile gameProfile) {
         super(level, gameProfile);
     }
+    //?} else {
+    /*public PlayerMixin(Level level, BlockPos pos, float yRot, GameProfile gameProfile) {
+        super(level, pos, yRot, gameProfile);
+    }
+    *///?}
 
     @Inject(method = "tick", at = @At(value = "HEAD"))
     private void mixin(CallbackInfo ci)
     {
         AABB box = new AABB(BlockPos.containing(position())).inflate(CONFIG.distance).expandTowards(0.0, CONFIG.distance, 0.0);
         level().getBlockStatesIfLoaded(box).forEach(blockState -> {
-            if (VALID_BLOCKS.contains(blockState.getBlock())) {
+            if (EFFECT_MAP.containsKey(blockState.getBlock())) {
                 applyPlayerEffects(level(), blockState, this);
             }
         });

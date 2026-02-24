@@ -167,6 +167,8 @@ dependencies {
     if (stonecutter.eval(mcVersion, "<1.21.9")) {
         "additionalRuntimeClasspath"("folk.sisby:kaleido-config:${property("deps.kaleido")}")
     }
+    compileOnly("maven.modrinth:qomc:${property("deps.qomc")}")
+
 
 
 
